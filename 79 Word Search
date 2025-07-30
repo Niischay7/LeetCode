@@ -1,0 +1,35 @@
+class Solution {
+    bool dfs(int row,int col,string &word, int idx, vector<vector<char>> &board){
+        int n = board.size();
+        int m = board[0].size();
+
+        if(idx == word.size()) return true;
+
+        if(row < 0 || row >= n || col < 0 || col >= m || board[row][col] != word[idx] || board[row][col] == '!') return false;
+        char c = board[row][col];
+        board[row][col] = '!';
+        bool top = dfs(row + 1,col, word,idx + 1,board);
+        bool bottom = dfs(row - 1,col,word,idx + 1,board);
+        bool left = dfs(row, col - 1,word, idx + 1,board);
+        bool right = dfs(row,col + 1,word,idx + 1, board);
+
+        board[row][col] = c;
+
+        return top || bottom || left || right;
+    }
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int n = board.size();
+        int m = board[0].size();
+        int idx = 0;
+
+        for(int i = 0; i < n;i++){
+            for(int j = 0; j < m ; j++){
+                if(board[i][j] == word[idx]){
+                    if(dfs(i,j,word,idx,board)) return true;
+                }
+            }
+        }
+        return false;
+    }
+};
