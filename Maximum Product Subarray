@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+
+        int mx = nums[0];
+        int mn = nums[0];
+        int mx_2 = nums[0];
+
+        for(int i = 1; i < n ; i++){
+            int curr = nums[i];
+
+            if(curr < 0) swap(mx_2,mn);
+
+            mx_2 = max(curr,mx_2 * curr);
+            mn = min(curr,mn * curr);
+
+            mx = max(mx,mx_2);
+        }
+
+        return mx;
+
+        // int n = nums.size();
+        // int ans = -1;
+        // if(n == 1) return nums[0];
+        // if(n == 2){
+        //     if(nums[0] * nums[1] > ans){
+        //         return nums[0] * nums[1];
+        //     }else{
+        //         return ans;
+        //     }
+        // }
+        // int curr = nums[0] * nums[1];
+        // int a = 0;
+        // int b = 1;
+        // while(a < n && b < n){
+        //     if(curr * nums[b]>= ans){
+        //         curr = nums[a] * nums[b];
+        //         // a++;
+        //         b++;
+        //     }else{
+        //         ans = max(ans,curr);
+        //         curr = -1;
+        //         a++;
+        //         b++;
+        //     }
+        // }
+        // return ans;
+    }
+};
