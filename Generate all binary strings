@@ -1,0 +1,25 @@
+// User function Template for C++
+
+class Solution {
+    
+    void fnc(int n, string curr, vector<string>& res){
+        if(curr.size() == n){
+            res.push_back(curr);
+            return;
+        }
+        
+        fnc(n,curr + '0',res);
+        if(curr.empty() || curr.back() == '0'){
+            fnc(n,curr + '1', res);
+        }
+        
+    }
+  public:
+    vector<string> generateBinaryStrings(int num) {
+        // Write your code
+        vector<string> res;
+        
+        fnc(num,"",res);
+        return res;
+    }
+};
