@@ -1,0 +1,40 @@
+/*
+class Node {
+  public:
+    int data;
+    Node* next;
+
+    // Default constructor
+    Node() {
+        data = 0;
+        next = NULL;
+    }
+
+    // Parameterised Constructor
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+*/
+class Solution {
+  public:
+    Node* deleteNode(Node* head, int x) {
+        // code here
+        if(head == nullptr) return nullptr;
+        if(x == 1){
+            Node* temp = head->next;
+            delete head;
+            return temp;
+        }
+        Node* curr = head;
+        for(int i = 1; i < x - 1 && curr != nullptr;i++){
+            curr = curr->next;
+        }
+        if(curr == nullptr || curr->next == nullptr) return nullptr;
+        Node* del = curr->next;
+        curr->next = curr->next->next;
+        delete del;
+        return head;
+    }
+};
